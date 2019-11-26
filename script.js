@@ -58,9 +58,14 @@ form.addEventListener('submit', event => {
      if(event.target.classList.contains('js-delete-todo')){
          const itemKey = event.target.parentElement.dataset.key;
          deleteTodo(itemKey);
-         if (localStorage.getItem("id") === null) {
-            //delete from localStorage
-         }
+         const test = JSON.parse(localStorage.getItem('items'))
+         const index = test.indexOf(itemKey)
+         // Splice the array at the index of your object
+            test.splice(index, 1)
+            // Save back to localStorage
+            localStorage.setItem("items", JSON.stringify(test))
+        
+        
      }
  })
 
@@ -128,7 +133,7 @@ form.addEventListener('submit', event => {
     item.remove();
 
     const list = document.querySelector('.js-todo-list');
-    if(todoItems.length === 0) list.innerHTML ='';
+    //if(todoItems.length === 0) list.innerHTML ='';
  }
 
  function saveListToFile(listItems){
